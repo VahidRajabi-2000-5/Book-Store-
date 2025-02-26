@@ -12,6 +12,8 @@
     {% for book in books %}
         <h1>{{book.title}}</h1>
         <p>{{book.content|truncatechars:100}}</p>
+        <a href="{{book.get_absolute_url}}" class="btn btn-sm btn-success">Read More</a>
+
         <hr>
     {% endfor %}
         
