@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 from .forms import CustomUserChangeForm,CustomUserCreationForm
 
-
+@admin.register(get_user_model())
 class CustomUseradmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm

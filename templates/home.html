@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+
+
+
+
+{% block title %}
+    Home Page
+{% endblock title %}
+    
+
+{% block content %}
+    <h1>Home</h1>
+    {% if user.is_authenticated %}
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <p class="m-0">Welcome {{ user.username }} | </p>
+            <h3><a class="text-decoration-none" href="{% url 'profile_view' user.id %}">Profile</a></h3>|
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link p-0 text-decoration-none">Logout</button>
+            </form>
+        </div>
+    {% else %}
+        <a class="text-decoration-none" href="{% url 'login' %}">Login</a> |
+        <a class="text-decoration-none" href="{% url 'signup' %}">SignUp</a> 
+    {% endif %}
+{% endblock content %}
+    
