@@ -13,6 +13,7 @@
     <h4>{{book.price}}</h4>
     <p>{{book.content}}</p>
     <a href="{% url 'book_update' book.id %}">update</a>
+    <a href="{% url 'book_delete' book.id %}">delete</a>
         
 {% endblock content %}
     

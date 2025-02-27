@@ -25,7 +25,6 @@ class BookCreateView(generic.CreateView):
     model = models.Book
     fields = ["title", "author", "content", "price",]
     template_name = "books/book_create.html"
-    context_object_name = "book_form"
     # success_url = reverse_lazy('books_list')
 
 
@@ -34,3 +33,9 @@ class BookUpdateView(generic.UpdateView):
     fields = ["title", "author", "content", "price",]
     template_name  = 'books/book_update.html'
     
+    
+class BookDeleteView(generic.DeleteView):
+    model = models.Book
+    template_name = 'books/book_delete.html'
+    context_object_name = 'book'
+    success_url = reverse_lazy('books_list') 
