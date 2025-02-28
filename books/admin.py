@@ -6,6 +6,7 @@ from . import models
 @admin.register(models.Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = [
+        'user',
         "title",
         "author",
         "price",
