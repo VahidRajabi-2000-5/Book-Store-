@@ -9,6 +9,7 @@ class BooksListView(generic.ListView):
     model = models.Book
     template_name = "books/books_list.html"
     context_object_name = "books"
+    paginate_by =4
 
     def get_queryset(self):
         return models.Book.objects.all().order_by(
