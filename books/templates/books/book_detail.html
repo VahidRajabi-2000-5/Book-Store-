@@ -38,7 +38,7 @@
         </div>
         <div>
           
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and book.user == user %}
           <a href="{% url 'book_update' book.id %}">update</a>
           <span>|</span>
           <a href="{% url 'book_delete' book.id %}">delete</a>

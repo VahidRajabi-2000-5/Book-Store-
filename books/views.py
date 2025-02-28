@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
 from . import models
@@ -67,7 +67,7 @@ class BookCreateView(LoginRequiredMixin, generic.CreateView):
     # success_url = reverse_lazy('books_list')
 
 
-class BookUpdateView(LoginRequiredMixin,generic.UpdateView):
+class BookUpdateView(LoginRequiredMixin,UserPassesTestMixin,generic.UpdateView):
     model = models.Book
     fields = [
         "title",
@@ -77,10 +77,18 @@ class BookUpdateView(LoginRequiredMixin,generic.UpdateView):
         "cover",
     ]
     template_name = "books/book_update.html"
+    
+    def test_func(self):
+        book = self.get_object()
+        return book.user == self.request.user 
 
 
-class BookDeleteView(LoginRequiredMixin, generic.DeleteView):
+class BookDeleteView(LoginRequiredMixin,UserPassesTestMixin, generic.DeleteView):
     model = models.Book
     template_name = "books/book_delete.html"
     context_object_name = "book"
     success_url = reverse_lazy("books_list")
+    
+    def test_func(self):
+        book = self.get_object()
+        return book.user == self.request.user
