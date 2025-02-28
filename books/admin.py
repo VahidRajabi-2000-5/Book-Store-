@@ -10,3 +10,14 @@ class BookAdmin(admin.ModelAdmin):
         "author",
         "price",
     ]
+
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = [
+        "user",
+        "book",
+        "datetime_created",
+        "text",
+    ]
+    list_editable = ['text']
+
