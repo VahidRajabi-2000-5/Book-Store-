@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -127,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -150,3 +151,9 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "vahidrajabi.software@gmail.com"
 EMAIL_HOST_PASSWORD = "rjmu dabr riul uldg"
+
+
+# Media files
+MEDIA_URL = "/media/"
+# MEDIA_ROOT = str(BASE_DIR.joinpath("static"))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

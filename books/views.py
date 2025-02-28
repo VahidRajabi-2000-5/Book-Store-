@@ -9,10 +9,11 @@ class BooksListView(generic.ListView):
     model = models.Book
     template_name = "books/books_list.html"
     context_object_name = "books"
-    
+
     def get_queryset(self):
-        return models.Book.objects.all().order_by('-datetime_created','-datetime_modified')
-    
+        return models.Book.objects.all().order_by(
+            "-datetime_created", "-datetime_modified"
+        )
 
 
 class BookDetailView(generic.DetailView):
@@ -23,19 +24,31 @@ class BookDetailView(generic.DetailView):
 
 class BookCreateView(generic.CreateView):
     model = models.Book
-    fields = ["title", "author", "content", "price",]
+    fields = [
+        "title",
+        "author",
+        "content",
+        "price",
+        "cover",
+    ]
     template_name = "books/book_create.html"
     # success_url = reverse_lazy('books_list')
 
 
 class BookUpdateView(generic.UpdateView):
     model = models.Book
-    fields = ["title", "author", "content", "price",]
-    template_name  = 'books/book_update.html'
-    
-    
+    fields = [
+        "title",
+        "author",
+        "content",
+        "price",
+        "cover",
+    ]
+    template_name = "books/book_update.html"
+
+
 class BookDeleteView(generic.DeleteView):
     model = models.Book
-    template_name = 'books/book_delete.html'
-    context_object_name = 'book'
-    success_url = reverse_lazy('books_list') 
+    template_name = "books/book_delete.html"
+    context_object_name = "book"
+    success_url = reverse_lazy("books_list")
