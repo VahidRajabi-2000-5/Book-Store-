@@ -15,21 +15,26 @@
     />
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
+    {% block static_css %}
+      
+    {% endblock static_css %}
+      
 
     <title>{% block title %} Some Title {% endblock title %}</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info" dir="rtl">
       <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'books_list' %}">
           <img
-            src="icons/book.png"
+            src="{% static 'icons/book.png' %}"
             alt=""
             height="30"
             class="d-inline-block align-text-top"
           />
         </a>
-        <a class="navbar-brand mx-3" href="#">کتاب یار</a>
+        <a class="navbar-brand mx-3" href="{% url 'books_list' %}">کتاب یار</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -43,13 +48,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="#">خانه</a>
-            <a class="nav-link" href="#">اضافه کردن کتاب</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">خانه</a>
+            <a class="nav-link" href="{% url 'book_create' %}">اضافه کردن کتاب</a>
           </div>
         </div>
         <div class="mx-2 text-white">
-          خوش آمدی محمدهادی |
-          <a class="link-light text-decoration-none" href="#">خروج</a>
+          
+          {% if user.is_authenticated %}
+            <div style="display: flex; align-items: center; gap: 5px;">
+              <p class="m-0">Welcome {{ user.username }} |
+              </p>
+              <form action="{% url 'logout' %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-link text-light p-0 text-decoration-none">Logout</button>
+              </form>
+            </div>
+          {% else %}
+            <a class="text-light text-decoration-none" href="{% url 'login' %}">Login</a> |  
+            <a class="text-light text-decoration-none" href="{% url 'signup' %}">Sign Up</a> 
+          {% endif %}
+            
         </div>
       </div>
     </nav>
