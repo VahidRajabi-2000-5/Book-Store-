@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -9,7 +9,7 @@ class BooksListView(generic.ListView):
     model = models.Book
     template_name = "books/books_list.html"
     context_object_name = "books"
-    paginate_by =4
+    paginate_by = 4
 
     def get_queryset(self):
         return models.Book.objects.all().order_by(
@@ -17,10 +17,18 @@ class BooksListView(generic.ListView):
         )
 
 
-class BookDetailView(generic.DetailView):
-    model = models.Book
-    template_name = "books/book_detail.html"
-    context_object_name = "book"
+# class BookDetailView(generic.DetailView):
+#     model = models.Book
+#     template_name = "books/book_detail.html"
+#     context_object_name = "book"
+
+
+def book_detail_view(request, pk):
+    book = get_object_or_404(models.Book, pk=pk)
+    
+    comments = book.comments.all()
+
+    return render(request, "books/book_detail.html", {"book": book,'comments':comments})
 
 
 class BookCreateView(generic.CreateView):
