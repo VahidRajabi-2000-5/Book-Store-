@@ -11,6 +11,7 @@ class BookAdmin(admin.ModelAdmin):
         "price",
     ]
 
+
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = [
@@ -18,6 +19,10 @@ class CommentAdmin(admin.ModelAdmin):
         "book",
         "datetime_created",
         "text",
+        "is_active",
+        "recommend",
     ]
-    list_editable = ['text']
-
+    list_editable = [
+        "is_active",
+        "recommend",
+    ]
